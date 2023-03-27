@@ -1,15 +1,17 @@
-import { ReactNode } from "react";
 import Sidebar from "../components/Sidebar";
-
-interface Children {
-  children: ReactNode;
-}
+import Header from "../components/Header";
+import { Children } from "../types";
 
 export default function RootLayout({ children }: Children) {
+  const auth = false;
+
   return (
-    <div className="flex gap-5">
-      <Sidebar />
-      <main className="max-w-5xl flex-1 mx-auto py-4">{children}</main>
+    <div className="flex w-full h-screen">
+      {auth && <Sidebar />}
+      <div className={`${auth ? "basis-10/12" : "w-full"}`}>
+        {auth && <Header />}
+        <div className="p-5 h-[92vh] overflow-auto">{children}</div>
+      </div>
     </div>
   );
 }
