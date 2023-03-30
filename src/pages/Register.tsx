@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import { Link } from "react-router-dom";
 import { registerSchema } from "../validations/RegisterValidation";
-import useRegister from "../hooks/UseRegister";
+import useRegister from "../hooks/useRegister";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
