@@ -1,16 +1,20 @@
 import { useFormik } from "formik";
 import { Link } from "react-router-dom";
 import { registerSchema } from "../validations/RegisterValidation";
+import useRegister from "../hooks/UseRegister";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface InitialValues {
   displayName: string;
   email: string;
   password: string;
   confirmPassword: string;
-  file: FileList | null;
+  file: File | null;
 }
 
 export default function Register() {
+  const register = useRegister();
   const {
     handleSubmit,
     handleChange,
@@ -28,12 +32,29 @@ export default function Register() {
       file: null,
     } as InitialValues,
     validationSchema: registerSchema,
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: async (values) => {
+      await register(
+        values.email,
+        values.password,
+        values.file,
+        values.displayName
+      );
     },
   });
   return (
     <div className="grid place-items-center mt-10 w-full">
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
       <div className="p-5 border-[1px] border-gray-400 rounded-md w-4/12">
         <h1 className="font-bold text-3xl text-center text-blue-700">
           Register
@@ -128,7 +149,7 @@ export default function Register() {
               isValid || isSubmitting ? " bg-blue-700" : "bg-blue-400"
             } btn`}
           >
-            Register
+            {isSubmitting ? "Please wait" : "Register"}
           </button>
         </form>
       </div>
