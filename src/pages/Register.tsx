@@ -105,8 +105,8 @@ export default function Register() {
               name="file"
               type="file"
               accept="image/png, image/jpg, image/jpeg"
-              onChange={(event) => {
-                setFieldValue("file", event.currentTarget.files);
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                setFieldValue("file", event.currentTarget.files?.[0]);
               }}
             />
             {errors.file ? (
