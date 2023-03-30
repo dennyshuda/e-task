@@ -1,8 +1,11 @@
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth, storage } from "../firebase/config";
+import { auth, db, storage } from "../firebase/config";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { doc, setDoc } from "firebase/firestore";
+import { useNavigate } from "react-router";
 
 export default function useRegister() {
+  const navigate = useNavigate();
   async function register(
     email: string,
     password: string,
@@ -36,6 +39,14 @@ export default function useRegister() {
       }
 
       console.log(response);
+
+      await setDoc(doc(db, "users", response.user.uid), {
+        online: false,
+        displayName: response.user.displayName,
+        photoURL: response.user.photoURL,
+        email: response.user.email,
+      });
+      navigate("/login");
     } catch (error) {
       console.log(error);
     } finally {
