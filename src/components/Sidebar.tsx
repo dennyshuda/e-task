@@ -5,7 +5,9 @@ import {
   PlusIcon,
   ArrowLeftOnRectangleIcon,
 } from "@heroicons/react/24/outline";
+import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { userLogout } from "../features/userSlice";
 
 const menus = [
   {
@@ -31,6 +33,7 @@ const menus = [
 ];
 
 export default function Sidebar() {
+  const dispatch = useDispatch();
   return (
     <aside className="basis-2/12 sidebar">
       <div>
@@ -45,7 +48,12 @@ export default function Sidebar() {
             <h1>{menu.name}</h1>
           </NavLink>
         ))}
-        <div className="navlink text-gray-500">
+        <div
+          className="navlink text-gray-500"
+          onClick={() => {
+            dispatch(userLogout());
+          }}
+        >
           <span className="mr-4 inline-block">
             <ArrowLeftOnRectangleIcon width="20" />
           </span>
