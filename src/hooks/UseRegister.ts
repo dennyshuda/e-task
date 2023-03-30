@@ -3,6 +3,7 @@ import { auth, db, storage } from "../firebase/config";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 export default function useRegister() {
   const navigate = useNavigate();
@@ -46,7 +47,21 @@ export default function useRegister() {
         photoURL: response.user.photoURL,
         email: response.user.email,
       });
-      navigate("/login");
+
+      toast.success("Succes Registration", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+
+      setTimeout(() => {
+        navigate("/login");
+      }, 2000);
     } catch (error) {
       console.log(error);
     } finally {
