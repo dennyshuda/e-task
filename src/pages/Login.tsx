@@ -1,6 +1,7 @@
 import { useFormik } from "formik";
 import { Link } from "react-router-dom";
 import { loginSchema } from "../validations/LoginValidation";
+import useLogin from "../hooks/useLogin";
 
 interface InitialValues {
   email: string;
@@ -8,6 +9,7 @@ interface InitialValues {
 }
 
 export default function Login() {
+  const login = useLogin();
   const { handleSubmit, handleChange, values, errors, isSubmitting, isValid } =
     useFormik({
       initialValues: {
@@ -15,8 +17,8 @@ export default function Login() {
         password: "",
       } as InitialValues,
       validationSchema: loginSchema,
-      onSubmit: (values) => {
-        console.log(values);
+      onSubmit: async (values) => {
+        await login(values.email, values.password);
       },
     });
   return (
@@ -67,7 +69,7 @@ export default function Login() {
               isValid || isSubmitting ? " bg-blue-700" : "bg-blue-400"
             } btn`}
           >
-            Login
+            {isSubmitting ? "Please wait" : "Login"}
           </button>
         </form>
       </div>
