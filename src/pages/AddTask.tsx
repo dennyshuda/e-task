@@ -54,7 +54,7 @@ export default function AddTask() {
     onSubmit: async (values) => {
       await addDoc(collection(db, "tasks"), {
         title: values.title,
-        description: values.duedate,
+        description: values.description,
         duedate: values.duedate,
         users: values.users,
         category: values.category,
