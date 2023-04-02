@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { UserType } from "../types";
 import { useFormik } from "formik";
 import { addTaskSchema } from "../validations/AddTaskValidation";
+import { addDoc, collection, doc, serverTimestamp } from "firebase/firestore";
+import { db } from "../firebase/config";
 
 interface OptionUsers {
   value: UserType;
@@ -49,8 +51,19 @@ export default function AddTask() {
       category: "",
     },
     validationSchema: addTaskSchema,
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: async (values) => {
+      await addDoc(collection(db, "tasks"), {
+        title: values.title,
+        description: values.duedate,
+        duedate: values.duedate,
+        users: values.users,
+        category: values.category,
+        complete: false,
+        timestamp: serverTimestamp(),
+        comment: [],
+      }).then((e) => {
+        console.log(e);
+      });
     },
   });
 
