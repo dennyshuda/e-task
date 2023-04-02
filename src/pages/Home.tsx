@@ -1,40 +1,12 @@
-import { CheckIcon } from "@heroicons/react/24/outline";
 import {
   CalendarIcon,
   ChatBubbleBottomCenterTextIcon,
-  DocumentCheckIcon,
-  DocumentDuplicateIcon,
-  DocumentIcon,
+  CheckIcon,
   ExclamationTriangleIcon,
-} from "@heroicons/react/24/solid";
+} from "@heroicons/react/24/outline";
+import { tasksCount } from "../utility/constant";
 
 export default function Home() {
-  const tasksCount = [
-    {
-      title: "All Tasks",
-      count: 30,
-      color: "text-blue-500",
-      icon: <DocumentDuplicateIcon width="50" className="text-blue-500" />,
-    },
-    {
-      title: "My Tasks",
-      count: 30,
-      color: "text-purple-500",
-      icon: <DocumentIcon width="50" className="text-purple-500" />,
-    },
-    {
-      title: "Completed Tasks",
-      count: 30,
-      color: "text-green-400",
-      icon: <DocumentCheckIcon width="50" className="text-green-400" />,
-    },
-    {
-      title: "Due Date",
-      count: 30,
-      color: "text-red-500",
-      icon: <ExclamationTriangleIcon width="50" className="text-red-500" />,
-    },
-  ];
   return (
     <div>
       <div className="flex gap-3 mb-8">

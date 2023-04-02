@@ -8,29 +8,7 @@ import {
 import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { userLogout } from "../features/userSlice";
-
-const menus = [
-  {
-    name: "Home",
-    to: "/",
-    icon: <HomeIcon width="20" />,
-  },
-  {
-    name: "My Tasks",
-    to: "/my-task",
-    icon: <ClipboardDocumentCheckIcon width="20" />,
-  },
-  {
-    name: "Add Tasks",
-    to: "/add-task",
-    icon: <PlusIcon width="20" />,
-  },
-  {
-    name: "Users",
-    to: "/users",
-    icon: <UserIcon width="20" />,
-  },
-];
+import { menus } from "../utility/constant";
 
 export default function Sidebar() {
   const dispatch = useDispatch();
