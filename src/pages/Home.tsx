@@ -5,8 +5,27 @@ import {
   ExclamationTriangleIcon,
 } from "@heroicons/react/24/outline";
 import { tasksCount } from "../utility/constant";
+import useGetTasks from "../hooks/useGetTasks";
+import useCompare from "../hooks/useCompare";
+import { useSelector } from "react-redux";
 
 export default function Home() {
+  const { tasks } = useGetTasks();
+
+  const auth = useSelector((state: any) => state.user);
+
+  const { isComplete, isInWork, isDue } = useCompare();
+
+  const tasksComplete = tasks.filter((task) => isComplete(task));
+
+  const tasksAtWork = tasks.filter((task) => isInWork(task));
+
+  const tasksIsDue = tasks.filter((task) => isDue(task));
+
+  const myTasks = tasks.filter((task) =>
+    task.users.find((user) => user.id === auth.userId)
+  );
+
   return (
     <div>
       <div className="flex gap-3 mb-8">
@@ -40,7 +59,7 @@ export default function Home() {
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                   do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                   Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                  laboris nisi ut aliquip ex ea commodo consequaot. Duis aute
                   irure dolor in reprehenderit in voluptate velit esse cillum
                   dolore eu fugiat nulla pariatur.
                 </p>
