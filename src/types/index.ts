@@ -11,3 +11,16 @@ export interface UserType {
   online: boolean;
   photoURL: string;
 }
+
+export interface TasksType {
+  id: string;
+  title: string;
+  duedate: string;
+  complete: boolean;
+  comment: string[];
+  timestamp: {
+    nanoseconds: number;
+    seconds: number;
+  };
+  users: UserType[];
+}
