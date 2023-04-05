@@ -19,19 +19,21 @@ export default function CardTask({ task }: TaskProps) {
             {task.category}
           </label>
           <div className="flex rounded-md">
-            <img
-              src="https://static.vecteezy.com/system/resources/thumbnails/002/275/847/small/male-avatar-profile-icon-of-smiling-caucasian-man-vector.jpg"
-              alt="avatar-user"
-              className="avatar ml-[-.5rem]"
-            />
-            <img
-              src="https://static.vecteezy.com/system/resources/thumbnails/002/275/847/small/male-avatar-profile-icon-of-smiling-caucasian-man-vector.jpg"
-              alt="avatar-user"
-              className="avatar ml-[-.5rem]"
-            />
-            <div className="w-8 text-white rounded-full border-2 bg-gray-400 border-white ml-[-.5rem] grid place-items-center text-xs">
-              3+
-            </div>
+            {task.users.map((user) => (
+              <img
+                key={user.id}
+                src={user.photoURL}
+                alt={user.displayName}
+                className="avatar ml-[-.5rem]"
+              />
+            ))}
+            {task.users.length > 3 ? (
+              <div className="w-8 text-white rounded-full border-2 bg-gray-400 border-white ml-[-.5rem] grid place-items-center text-xs">
+                {task.users.length - 1}+
+              </div>
+            ) : (
+              ""
+            )}
           </div>
         </div>
       </div>
