@@ -16,7 +16,9 @@ export interface TasksType {
   id: string;
   title: string;
   duedate: string;
+  description: string;
   complete: boolean;
+  category: string;
   comment: string[];
   timestamp: {
     nanoseconds: number;
