@@ -3,6 +3,7 @@ import {
   ChatBubbleBottomCenterTextIcon,
 } from "@heroicons/react/24/outline";
 import { TasksType } from "../types";
+import LabelCategory from "./LabelCategory";
 
 interface TaskProps {
   task: TasksType;
@@ -15,9 +16,7 @@ export default function CardTask({ task }: TaskProps) {
         <h1 className="font-medium text-lg capitalize mb-2">{task.title}</h1>
         <p className="text-sm text-gray-500 text-justify">{task.description}</p>
         <div className="flex justify-between pt-5 items-center">
-          <label className="bg-green-100 px-3 py-1 rounded-full font-medium text-green-500 text-sm">
-            {task.category}
-          </label>
+          <LabelCategory title={task.category} />
           <div className="flex rounded-md">
             {task.users.map((user) => (
               <img
