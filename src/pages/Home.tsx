@@ -1,14 +1,9 @@
-import {
-  CalendarIcon,
-  ChatBubbleBottomCenterTextIcon,
-  CheckIcon,
-  ExclamationTriangleIcon,
-} from "@heroicons/react/24/outline";
 import { tasksCount } from "../utility/constant";
 import useGetTasks from "../hooks/useGetTasks";
 import useCompare from "../hooks/useCompare";
 import { useSelector } from "react-redux";
 import CardTask from "../components/CardTask";
+import LoadingSkeleton from "../components/LoadingSkeleton";
 
 export default function Home() {
   const { tasks } = useGetTasks();
@@ -63,6 +58,7 @@ export default function Home() {
             {tasksAtWork.map((task) => (
               <CardTask key={task.id} task={task} />
             ))}
+            {tasks.length === 0 && <LoadingSkeleton />}
           </div>
         </div>
         <div className="basis-4/12 ">
@@ -76,6 +72,7 @@ export default function Home() {
             {tasksComplete.map((task) => (
               <CardTask key={task.id} task={task} />
             ))}
+            {tasks.length === 0 && <LoadingSkeleton />}
           </div>
         </div>
         <div className="basis-4/12">
@@ -89,6 +86,7 @@ export default function Home() {
             {tasksIsDue.map((task) => (
               <CardTask key={task.id} task={task} />
             ))}
+            {tasks.length === 0 && <LoadingSkeleton />}
           </div>
         </div>
       </div>
