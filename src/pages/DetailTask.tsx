@@ -3,27 +3,27 @@ import {
   PaperAirplaneIcon,
   TrashIcon,
 } from "@heroicons/react/24/outline";
+import { useLocation } from "react-router";
+import useGetTaskById from "../hooks/useGetTaskById";
+
 export default function DetailTask() {
+  const { state: id } = useLocation();
+  const { task } = useGetTaskById(id);
+  console.log(task);
+
   return (
     <div className="flex">
       <div className="basis-8/12">
         <div className="border-[1px] rounded-md p-4">
-          <h1 className="text-xl font-medium mb-3">Judul</h1>
+          <h1 className="text-xl font-medium mb-3">{task?.title}</h1>
           <div className="text-gray-500 flex gap-2 mb-3 items-center">
             <CalendarIcon width="20" />
-            <span>12 Jan 2022</span>
+            <span>{task?.duedate}</span>
             <label className="bg-red-100 px-3 py-1 rounded-full font-medium text-red-500 text-sm">
               Due Date
             </label>
           </div>
-          <p className="text-justify text-gray-700 mb-5">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur.
-          </p>
+          <p className="text-justify text-gray-700 mb-5">{task?.description}</p>
           <div className="flex gap-3">
             <button className="bg-green-600 hover:bg-green-700 btn">
               Mark As Completed
@@ -66,22 +66,16 @@ export default function DetailTask() {
         <div className="border-[1px] rounded-md p-3">
           <h1 className="text-xl font-medium mb-3">Users</h1>
           <div>
-            <div className="text-sm py-1 text-gray-500 flex items-center">
-              <img
-                src="https://static.vecteezy.com/system/resources/thumbnails/002/275/847/small/male-avatar-profile-icon-of-smiling-caucasian-man-vector.jpg"
-                alt="avatar-user"
-                className="avatar mr-2"
-              />
-              <h1>Nama User</h1>
-            </div>
-            <div className="text-sm py-1 text-gray-500 flex items-center">
-              <img
-                src="https://static.vecteezy.com/system/resources/thumbnails/002/275/847/small/male-avatar-profile-icon-of-smiling-caucasian-man-vector.jpg"
-                alt="avatar-user"
-                className="avatar mr-2"
-              />
-              <h1>Nama User</h1>
-            </div>
+            {task?.users.map((user) => (
+              <div className="text-sm py-1 text-gray-500 flex items-center">
+                <img
+                  src={user.photoURL}
+                  alt="avatar-user"
+                  className="avatar mr-2"
+                />
+                <h1>{user.displayName}</h1>
+              </div>
+            ))}
           </div>
         </div>
       </div>
