@@ -4,15 +4,21 @@ import {
 } from "@heroicons/react/24/outline";
 import { TasksType } from "../types";
 import LabelCategory from "./LabelCategory";
+import { useNavigate } from "react-router";
 
 interface TaskProps {
   task: TasksType;
 }
 
 export default function CardTask({ task }: TaskProps) {
+  const navigate = useNavigate();
+
+  function navigateToDetail() {
+    navigate(`/detail/${task.id}`, { state: task.id });
+  }
   return (
     <div className="border-[1px] rounded-md">
-      <div className="p-4">
+      <div onClick={navigateToDetail} className="p-4 cursor-pointer">
         <h1 className="font-medium text-lg capitalize mb-2">{task.title}</h1>
         <p className="text-sm text-gray-500 text-justify">{task.description}</p>
         <div className="flex justify-between pt-5 items-center">
