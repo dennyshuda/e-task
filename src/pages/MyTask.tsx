@@ -34,7 +34,7 @@ export default function MyTask() {
         </header>
         <div className="pt-7 flex flex-col gap-6">
           {tasksAtWork.map((task) => (
-            <CardTask task={task} />
+            <CardTask key={task.id} task={task} />
           ))}
         </div>
       </div>
@@ -48,7 +48,7 @@ export default function MyTask() {
         </header>
         <div className="pt-7 flex flex-col gap-6">
           {tasksComplete.map((task) => (
-            <CardTask task={task} />
+            <CardTask key={task.id} task={task} />
           ))}
         </div>
       </div>
@@ -62,7 +62,7 @@ export default function MyTask() {
         </header>
         <div className="pt-7 flex flex-col gap-6">
           {tasksIsDue.map((task) => (
-            <CardTask task={task} />
+            <CardTask key={task.id} task={task} />
           ))}
         </div>
       </div>
